@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ship It Society - Thomas Partnership Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0c0c14;
+  --card: #16162a;
+  --card-border: rgba(255,255,255,0.08);
+  --accent: #7c3aed;
+  --accent-glow: rgba(124, 58, 237, 0.15);
+  --green: #22c55e;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --cyan: #06b6d4;
+  --text: #f0f0f5;
+  --text-secondary: #a0a0b8;
+  --radius: 16px;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.deck { width: 100%; height: 100%; position: relative; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease;
+  overflow-y: auto;
+  padding: 50px 40px 80px;
+  scrollbar-gutter: stable;
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide.center-v { align-items: center; }
+
+.slide::-webkit-scrollbar { width: 6px; }
+.slide::-webkit-scrollbar-track { background: transparent; }
+.slide::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.3); border-radius: 3px; }
+.slide::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.5); }
+
+.slide-inner {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Inter', sans-serif; font-weight: 700; line-height: 1.15; }
+h1 { font-size: 52px; letter-spacing: -0.02em; margin-bottom: 16px; text-wrap: balance; }
+h2 { font-size: 44px; letter-spacing: -0.02em; margin-bottom: 16px; text-align: center; }
+h3 { font-size: 28px; margin-bottom: 12px; }
+h4 { font-size: 22px; margin-bottom: 8px; font-weight: 600; }
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.subtitle { font-size: 22px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 24px; font-weight: 400; text-align: center; }
+
+.playfair-quote {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.text-secondary { color: var(--text-secondary); }
+.text-accent { color: var(--accent); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-amber { color: var(--amber); }
+.text-cyan { color: var(--cyan); }
+strong { font-weight: 700; }
+s { color: var(--text-secondary); text-decoration: line-through; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.card:hover {
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+.card-sm { padding: 24px; }
+.card-red { border-color: rgba(239,68,68,0.25); background: rgba(239,68,68,0.05); }
+.card-green { border-color: rgba(34,197,94,0.25); background: rgba(34,197,94,0.05); }
+.card-violet { border-color: rgba(124,58,237,0.35); background: rgba(124,58,237,0.06); }
+.card-amber { border-color: rgba(245,158,11,0.25); background: rgba(245,158,11,0.05); }
+.card-cyan { border-color: rgba(6,182,212,0.25); background: rgba(6,182,212,0.05); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+.bullet-list { list-style: none; padding: 0; }
+.bullet-list li {
+  padding: 10px 0 10px 28px;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.bullet-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 18px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.bullet-list.green li::before { background: var(--green); }
+.bullet-list.red li::before { background: var(--red); }
+
+.check-list, .x-list { list-style: none; padding: 0; }
+.check-list li, .x-list li {
+  padding: 8px 0 8px 32px;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.check-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0; top: 8px;
+  color: var(--green);
+  font-weight: 700;
+  font-size: 18px;
+}
+.x-list li::before {
+  content: '\2717';
+  position: absolute;
+  left: 0; top: 8px;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.quote-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+.quote-card p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+}
+.quote-card .quote-attr {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.stat { text-align: center; padding: 28px 20px; }
+.stat .num { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 8px; }
+.stat .label { font-size: 16px; color: var(--text-secondary); line-height: 1.4; }
+
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  text-align: center;
+}
+.flow-box {
+  background: rgba(124,58,237,0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.flow-box-green {
+  background: rgba(34,197,94,0.1);
+  border-radius: 8px;
+  padding: 10px 12px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.flow-arrow { color: var(--accent); font-size: 16px; flex-shrink: 0; }
+
+/* Gap visual */
+.gap-visual { display: flex; align-items: stretch; gap: 0; margin-bottom: 24px; }
+.gap-box {
+  flex: 1;
+  padding: 28px 24px;
+  border-radius: var(--radius);
+  text-align: center;
+}
+.gap-box.gap-current {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+.gap-box.gap-future {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+.gap-box h4 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+.gap-box p { font-size: 17px; line-height: 1.5; }
+.gap-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.tl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.tl-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+}
+.tl-card.tl-full { grid-column: 1 / -1; border-color: rgba(34,197,94,0.25); background: rgba(34,197,94,0.04); }
+.tl-card h4 { font-size: 18px; margin-bottom: 12px; }
+.tl-card li { font-size: 15px; color: var(--text-secondary); padding: 3px 0; line-height: 1.5; list-style: none; }
+.tl-card ul { list-style: none; padding: 0; }
+.tl-card .tl-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.tl-badge-purple { background: rgba(124,58,237,0.15); color: var(--accent); }
+.tl-badge-amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+.tl-badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+.tl-badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+.tl-badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+.tl-card .milestone { color: var(--green); font-weight: 600; font-style: italic; }
+
+.glow-card {
+  background: linear-gradient(135deg, rgba(124,58,237,0.12) 0%, rgba(34,197,94,0.08) 100%);
+  border: 1px solid rgba(124,58,237,0.3);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(124,58,237,0.08);
+}
+
+.section-divider {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--green));
+  border-radius: 2px;
+  margin: 0 auto 32px;
+}
+
+.pricing-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 36px;
+  text-align: center;
+  position: relative;
+}
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px rgba(124,58,237,0.12);
+}
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 20px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-big { font-size: 52px; font-weight: 700; margin: 16px 0 8px; }
+
+.value-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.value-line:last-child { border-bottom: none; }
+
+.savings-badge {
+  display: inline-block;
+  background: rgba(34,197,94,0.12);
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+/* Revenue table */
+.rev-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+.rev-table th {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.rev-table td {
+  font-size: 17px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.rev-table tr:last-child td { border-bottom: none; }
+.rev-table .highlight-row { background: rgba(124,58,237,0.06); }
+.rev-table .highlight-row td { font-weight: 600; }
+
+/* Phase cards */
+.phase-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  border-top: 3px solid var(--accent);
+}
+.phase-card.phase-green { border-top-color: var(--green); }
+.phase-card.phase-amber { border-top-color: var(--amber); }
+.phase-num {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.phase-card.phase-green .phase-num { color: var(--green); }
+.phase-card.phase-amber .phase-num { color: var(--amber); }
+
+/* Deliverable cards */
+.del-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.del-num {
+  display: inline-block;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+.del-card h4 { font-size: 17px; margin-bottom: 8px; }
+.del-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
+
+/* Navigation */
+.nav-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(12,12,20,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  z-index: 100;
+}
+.nav-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 200ms ease;
+  flex-shrink: 0;
+}
+.nav-dot.active { background: var(--accent); transform: scale(1.3); }
+.nav-counter {
+  position: fixed;
+  bottom: 54px;
+  right: 40px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  z-index: 100;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Utilities */
+.mb-4 { margin-bottom: 4px; }
+.mb-8 { margin-bottom: 8px; }
+.mb-12 { margin-bottom: 12px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-24 { margin-bottom: 24px; }
+.mb-32 { margin-bottom: 32px; }
+.mb-40 { margin-bottom: 40px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-20 { margin-top: 20px; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.small { font-size: 14px; }
+.muted { color: var(--text-secondary); opacity: 0.6; }
+
+@media (max-width: 1024px) {
+  .slide { padding: 40px 24px 80px; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 36px; }
+  .grid-2, .grid-3, .tl-grid { grid-template-columns: 1fr; }
+  .tl-card.tl-full { grid-column: auto; }
+  .flow-row { flex-wrap: wrap; }
+  .gap-visual { flex-direction: column; }
+  .gap-arrow { padding: 12px 0; }
+  .rev-table th, .rev-table td { padding: 10px 8px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITLE -->
+<!-- ============================================================ -->
+<div class="slide active center-v" data-slide="1">
+<div class="slide-inner" style="text-align:center; align-items:center;">
+  <p class="eyebrow mb-8">Partnership Proposal</p>
+  <h1 style="text-align:center;">Ship It Society</h1>
+  <p class="subtitle" style="max-width:740px; margin:0 auto 32px;">100 days. $97/mo. Guaranteed first $3,000 client or your money back. Built on Hormozi&#8217;s Rule of 100, powered by AI tools you build.</p>
+  <div class="grid-3 mb-32" style="max-width:700px; margin-left:auto; margin-right:auto;">
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:16px 12px;">
+        <div class="num text-accent" style="font-size:36px;">100</div>
+        <div class="label">Day Program</div>
+      </div>
+    </div>
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:16px 12px;">
+        <div class="num text-green" style="font-size:36px;">$3K</div>
+        <div class="label">Client Guarantee</div>
+      </div>
+    </div>
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:16px 12px;">
+        <div class="num text-amber" style="font-size:36px;">10x</div>
+        <div class="label">ROI for Members</div>
+      </div>
+    </div>
+  </div>
+  <p class="text-secondary" style="font-size:16px;">Jordan Rafealov + Thomas Dolso</p>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: THE OPPORTUNITY -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="2">
+<div class="slide-inner">
+  <p class="eyebrow">The Opportunity</p>
+  <h2>We&#8217;re Sitting on a Gold Mine</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-3 mb-24">
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num text-accent" style="font-size:42px;">5,000</div>
+        <div class="label">Free Skool members<br>doing nothing</div>
+      </div>
+    </div>
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num text-green" style="font-size:42px;">49</div>
+        <div class="label">Paid members<br>(peaked 100+)</div>
+      </div>
+    </div>
+    <div class="card card-sm text-center">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num text-amber" style="font-size:42px;">90%</div>
+        <div class="label">Profit margin<br>on Skool revenue</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-card mb-24">
+    <p>&#8220;My friend showed me his dashboard today behind Skool, and he&#8217;s not doing stuff that&#8217;s very complicated, and he&#8217;s making so much money. It&#8217;s all pure profit. There&#8217;s no service delivery. There&#8217;s no clients asking for your time.&#8221;</p>
+    <div class="quote-attr">&#8212; Jordan</div>
+  </div>
+
+  <div class="card card-violet card-sm text-center">
+    <p style="font-size:18px;"><strong>At just 2% conversion:</strong> 100 paid members &times; $97/mo = <strong class="text-green">$9,700 MRR</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: WHY IT'S BROKEN -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="3">
+<div class="slide-inner">
+  <p class="eyebrow">Diagnosis</p>
+  <h2 class="text-red">Why the Skool Hasn&#8217;t Taken Off</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-3 mb-24">
+    <div class="card card-red" style="padding:28px;">
+      <h4 class="text-red mb-12" style="font-size:20px;">No Traffic</h4>
+      <p class="text-secondary" style="font-size:16px; line-height:1.6;">Not driving to the free group consistently. Not converting free to paid. "Sometimes I'll mention it" level effort.</p>
+    </div>
+    <div class="card card-red" style="padding:28px;">
+      <h4 class="text-red mb-12" style="font-size:20px;">No Outcome</h4>
+      <p class="text-secondary" style="font-size:16px; line-height:1.6;">No productized offering. People don't know what they'll achieve. Everyone else guarantees a result. We don't.</p>
+    </div>
+    <div class="card card-red" style="padding:28px;">
+      <h4 class="text-red mb-12" style="font-size:20px;">Overwhelming</h4>
+      <p class="text-secondary" style="font-size:16px; line-height:1.6;">People don't know where to start. Everything unlocked at once = paralysis. Biggest driver of churn.</p>
+    </div>
+  </div>
+
+  <div class="card card-sm mb-24" style="text-align:center; border-color:rgba(239,68,68,0.15);">
+    <p class="text-secondary" style="font-size:17px;">Peaked at <strong class="text-red">100+ members</strong> during the Hormozi launch. Now down to <strong class="text-red">49</strong>. Massive churn because there was no structure, no outcome, no reason to stay.</p>
+  </div>
+
+  <div class="quote-card">
+    <p>&#8220;The only thing that&#8217;s valuable right now is the calls. The SOPs are things anybody can get off YouTube. It&#8217;s not differentiated. We need something people can&#8217;t get anywhere else.&#8221;</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: THE FIX -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="4">
+<div class="slide-inner">
+  <p class="eyebrow">The Fix</p>
+  <h2 class="text-accent">Outcome-Based, Structured Program</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:700px; margin:0 auto 32px;">Stop overwhelming people. Gate the content. Guide them step by step to a clear result.</p>
+
+  <div class="gap-visual mb-24">
+    <div class="gap-box gap-current">
+      <h4 class="text-red">Current State</h4>
+      <p class="text-secondary">Content dump<br>&#8220;Where do I start?&#8221;</p>
+    </div>
+    <div class="gap-arrow">&#8594; REVAMP &#8594;</div>
+    <div class="gap-box gap-future">
+      <h4 class="text-green">Future State</h4>
+      <p class="text-secondary">100-day guided path<br>&#8220;Day 1: Do this. Day 30: Do this.&#8221;</p>
+    </div>
+  </div>
+
+  <div class="quote-card mb-24">
+    <p>&#8220;Instead of people coming in and having everything unlocked, break it down by the day or the week or the month. Forget about all that stuff&#8202;&#8212;&#8202;this is what you do week one.&#8221;</p>
+  </div>
+
+  <div class="card card-green card-sm">
+    <h4 class="text-green mb-8">The Promise</h4>
+    <p style="font-size:17px; line-height:1.6;">&#8220;Join Ship It Society. In 100 days, you&#8217;ll land your first $3,000 paid client using AI-powered podcast lead gen&#8202;&#8212;&#8202;or your money back.&#8221;</p>
+    <p class="text-secondary mt-12" style="font-size:15px;">Clear outcome. Clear timeline. Clear guarantee. 10x ROI.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: REAL DEMAND -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="5">
+<div class="slide-inner">
+  <p class="eyebrow">Real Demand</p>
+  <h2>What 5,000 People Already Want</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:700px; margin:0 auto 32px;">We polled the free Skool group. 67 votes. These are the exact things they&#8217;re asking for.</p>
+
+  <div class="grid-2 mb-24">
+    <div class="card card-violet" style="text-align:center;">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num text-accent" style="font-size:44px;">23</div>
+        <div class="label" style="font-size:18px;">Automate Content Creation</div>
+      </div>
+      <p class="text-secondary" style="font-size:15px; margin-top:8px;">Content Script Writer + Kloned = this</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num" style="font-size:44px;">18</div>
+        <div class="label" style="font-size:18px;">Automate My Business</div>
+      </div>
+      <p class="text-secondary" style="font-size:15px; margin-top:8px;">n8n workflows + Claude Code kit = this</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num" style="font-size:44px;">17</div>
+        <div class="label" style="font-size:18px;">How To Use Claude Code</div>
+      </div>
+      <p class="text-secondary" style="font-size:15px; margin-top:8px;">CLAUDE.md + Skills Kit = this</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="stat" style="padding:12px 0;">
+        <div class="num" style="font-size:44px;">7</div>
+        <div class="label" style="font-size:18px;">How To Use Clawde Bot</div>
+      </div>
+      <p class="text-secondary" style="font-size:15px; margin-top:8px;">OpenClaw bot integration = this</p>
+    </div>
+  </div>
+
+  <div class="card card-green card-sm text-center">
+    <p style="font-size:18px;"><strong>Every single thing they voted for is something you would build.</strong> The audience is literally asking for your skillset.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: MARKET PROOF -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="6">
+<div class="slide-inner">
+  <p class="eyebrow">Market Proof</p>
+  <h2>This Already Works</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <h4 class="mb-12">Nick Saraev &#8212; Maker School</h4>
+      <div class="stat" style="padding:16px 0;">
+        <div class="num text-green" style="font-size:42px;">$486K/mo</div>
+        <div class="label">2,600 members at $187/mo</div>
+      </div>
+      <ul class="bullet-list" style="font-size:16px;">
+        <li>Teaches Make and n8n with template files</li>
+        <li>Members have to configure everything themselves</li>
+        <li>His guarantee: first client in 90 days or money back</li>
+        <li>No real software products</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h4 class="text-green mb-12">Ship It Society &#8212; Our Edge</h4>
+      <div class="stat" style="padding:16px 0;">
+        <div class="num text-accent" style="font-size:42px;">100 Days</div>
+        <div class="label">Structured + $3K guarantee</div>
+      </div>
+      <ul class="check-list" style="font-size:16px;">
+        <li>Real tools not templates</li>
+        <li>Claude Code interface</li>
+        <li>Proven methodology (podcast Trojan horse)</li>
+        <li>$3K client guarantee, not just any client &#8212; 10x ROI</li>
+        <li>Your software products as moat (Kloned)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <p>&#8220;If someone else is making $486K/mo at $187/mo with a 90-day guarantee, imagine what we can do at $97/mo with real tools, a proven methodology, and a $3,000 guarantee - not just any client, a $3K one.&#8221;</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: THE 100-DAY SYSTEM -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="7">
+<div class="slide-inner">
+  <p class="eyebrow">The Program</p>
+  <h2>The 100-Day System</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:740px; margin:0 auto 32px;">Four phases. Each one powered by the AI tools you build. Members follow a daily system &#8212; the AI handles the volume.</p>
+
+  <div class="grid-2 mb-20">
+    <div class="phase-card">
+      <div class="phase-num">Days 1&#8211;10 / Foundation</div>
+      <h4 class="mb-8">Set Up The Machine</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Install Claude Code kit (CLAUDE.md + skills)</li>
+        <li>Connect accounts (Instantly, Apollo, etc.)</li>
+        <li>Define ICP and dream prospect list</li>
+        <li>Set up podcast</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; color:var(--green); font-weight:600;">By Day 10: Working outreach system + podcast ready</p>
+    </div>
+    <div class="phase-card phase-amber">
+      <div class="phase-num">Days 11&#8211;40 / Pipeline Building</div>
+      <h4 class="mb-8">Rule of 100 Kicks In</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Lead enrichment workflows running daily</li>
+        <li>100+ prospects contacted per day</li>
+        <li>Booking podcast guests from dream list</li>
+        <li>Inbox monitor classifying every reply</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; color:var(--green); font-weight:600;">By Day 40: Full pipeline, conversations starting</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="phase-card phase-green">
+      <div class="phase-num">Days 41&#8211;70 / Conversations</div>
+      <h4 class="mb-8">Interviews Become Sales Calls</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Recording podcast interviews with prospects</li>
+        <li>Surfacing pain points in conversation</li>
+        <li>Transitioning to discovery calls</li>
+        <li>Proposal generator sends proposals in 60 seconds</li>
+        <li>Content scripts from podcast episodes</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; color:var(--green); font-weight:600;">By Day 70: Active proposals out, deals in motion</p>
+    </div>
+    <div class="phase-card phase-green">
+      <div class="phase-num">Days 71&#8211;100 / Close</div>
+      <h4 class="mb-8">Everything Compounds</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Analytics dashboard showing full pipeline</li>
+        <li>Follow-ups running automatically</li>
+        <li>AI video content scaling their presence</li>
+        <li>Multiple conversations converting</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; color:var(--green); font-weight:600;">By Day 100: $3,000+ client closed or money back</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: DREAM TEAM -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="8">
+<div class="slide-inner">
+  <p class="eyebrow">The Dream Team</p>
+  <h2 class="text-accent">Four Roles, Zero Gaps</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-2 mb-24">
+    <div class="card card-violet card-sm">
+      <h4 class="text-accent mb-8">Jordan &#8212; CEO &amp; Growth</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Marketing strategy &amp; YouTube traffic</li>
+        <li>Weekly coaching calls</li>
+        <li>Mindset, leadership, and sales</li>
+        <li>Face of Ship It Society</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; font-weight:600; color:var(--accent);">ON CAMERA &#8212; The voice and brand</p>
+    </div>
+    <div class="card card-green card-sm">
+      <h4 class="text-green mb-8">Angela &#8212; Operations &amp; Delivery</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Member experience &amp; onboarding</li>
+        <li>HR, team management, SOPs</li>
+        <li>Quality assurance</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; font-weight:600; color:var(--green);">BEHIND THE SCENES &#8212; The operator</p>
+    </div>
+    <div class="card card-cyan card-sm">
+      <h4 class="text-cyan mb-8">AI Implementation Specialist (TBD)</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Live workshops &amp; Q&amp;A</li>
+        <li>Tutorials and walkthroughs</li>
+        <li>Bridges AI to plain English</li>
+        <li>Helps members implement</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; font-weight:600; color:var(--cyan);">ON CAMERA &#8212; The technical translator</p>
+    </div>
+    <div class="card card-amber card-sm">
+      <h4 class="text-amber mb-8">Future: Sales Coach</h4>
+      <ul class="bullet-list" style="font-size:15px;">
+        <li>Discovery frameworks &amp; objection handling</li>
+        <li>Pipeline coaching &amp; role-play</li>
+        <li>Hot seats and deal reviews</li>
+      </ul>
+      <p class="mt-12" style="font-size:14px; font-weight:600; color:var(--amber);">FUTURE HIRE &#8212; When pipeline demands it</p>
+    </div>
+  </div>
+
+  <div class="quote-card">
+    <p>&#8220;I don&#8217;t want to be the sole magic inside the Skool because then I&#8217;m always going to be tied to it.&#8221;</p>
+    <div class="quote-attr">&#8212; Jordan</div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: THOMAS THE BUILDER -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="9">
+<div class="slide-inner">
+  <p class="eyebrow">The Unfair Advantage</p>
+  <h2 class="text-green">Thomas Dolso &#8212; The Builder</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:740px; margin:0 auto 32px;">A senior software developer who has built and exited multiple products for millions. Now building the AI infrastructure behind Ship It Society.</p>
+
+  <div class="grid-2 mb-24">
+    <div class="card card-green">
+      <h4 class="text-green mb-12">What Thomas Has Built</h4>
+      <ul class="check-list" style="font-size:16px;">
+        <li>MediaPlace (desktop app for creatives)</li>
+        <li>CreateStudio (multi-million exit)</li>
+        <li>Clipmagic (AI video editing)</li>
+        <li>Cloned.ai (AI avatar/cloning)</li>
+        <li>Multiple exits totaling millions</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 class="mb-12">Why This Changes Everything</h4>
+      <ul class="bullet-list" style="font-size:16px;">
+        <li>Not templates &#8212; real software</li>
+        <li>Senior-level architecture</li>
+        <li>Claude Code superpower &#8212; 10x speed</li>
+        <li>Revenue share &#8212; aligned incentives</li>
+        <li>Behind the scenes &#8212; no camera needed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-violet card-sm text-center">
+    <p style="font-size:18px;"><strong>The vision:</strong> Members plug in their API keys and domain &#8212; everything deploys itself. Not a tutorial. Not a template. <strong>A product.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: WHAT THOMAS BUILDS -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="10">
+<div class="slide-inner">
+  <p class="eyebrow">Your Deliverables</p>
+  <h2>What You Would Build</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:740px; margin:0 auto 32px;">Everything built using Claude Code. Not months &#8212; weeks. 8 deliverables that power the entire 100-day system.</p>
+
+  <div class="grid-2 mb-20">
+    <div class="del-card">
+      <div class="del-num">1</div>
+      <h4>CLAUDE.md + Skills Kit</h4>
+      <p>Production-ready Claude Code config. MCP configs, skill structure, hooks, best practices. <strong>This is the Day 1 tool.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">2</div>
+      <h4>Lead Research &amp; Enrichment</h4>
+      <p>n8n + Python. Apollo/Clay, MillionVerifier, scoring. <strong>100+ verified leads daily, automatically.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">3</div>
+      <h4>Inbox Monitor &amp; Reply Classifier</h4>
+      <p>n8n connecting Instantly. AI classification, alerts for hot leads. <strong>The &#8220;it works while you sleep&#8221; piece.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">4</div>
+      <h4>Campaign Setup Automation</h4>
+      <p>n8n, Instantly API, lead lists + templates. <strong>Members never touch Instantly&#8217;s UI.</strong></p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="del-card">
+      <div class="del-num">5</div>
+      <h4>Proposal Generator</h4>
+      <p>Discovery call info to branded PDF. <strong>Professional proposal in 60 seconds flat.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">6</div>
+      <h4>Analytics &amp; Reporting</h4>
+      <p>Instantly stats, daily briefing, Rule of 100 progress. <strong>Days remaining in the 100-day sprint.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">7</div>
+      <h4>Content Script Writer</h4>
+      <p>Podcast transcripts to YouTube/LinkedIn/newsletter/video scripts. <strong>Every interview becomes a week of content.</strong></p>
+    </div>
+    <div class="del-card">
+      <div class="del-num">8</div>
+      <h4>AI Video via Kloned</h4>
+      <p>AI avatar, any script to video. <strong>Nobody else in the Skool space can offer this.</strong></p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11: THOMAS'S ROLE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="11">
+<div class="slide-inner">
+  <p class="eyebrow">Your Role</p>
+  <h2>What You Do (and Don&#8217;t Do)</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-2 mb-24">
+    <div class="card card-green">
+      <h4 class="text-green mb-16">You Build + Support</h4>
+      <ul class="check-list" style="font-size:17px;">
+        <li>CLAUDE.md architecture</li>
+        <li>n8n workflows</li>
+        <li>Skills + MCP configs</li>
+        <li>Proposal templates</li>
+        <li>Analytics dashboards</li>
+        <li>Kloned integration</li>
+        <li>Bug fixes &amp; API updates</li>
+        <li>2-3 hrs/week answering questions in the group</li>
+      </ul>
+    </div>
+    <div class="card card-red">
+      <h4 class="text-red mb-16">You Don&#8217;t</h4>
+      <ul class="x-list" style="font-size:17px;">
+        <li>Go on camera</li>
+        <li>Live coaching calls</li>
+        <li>Sales copy</li>
+        <li>Community management</li>
+        <li>Refunds/billing</li>
+        <li>Course content</li>
+        <li>Marketing or member acquisition</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card card-violet card-sm text-center">
+    <p style="font-size:18px;"><strong>You build the tools and answer technical questions in the group. I film 100s of Loom walkthroughs, build the classroom, manage the group, and drive all the traffic.</strong></p>
+    <p class="text-secondary mt-12" style="font-size:16px;">After the initial build: 2&#8211;3 hrs/week in the group + occasional maintenance.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12: BUILD TIMELINE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="12">
+<div class="slide-inner">
+  <p class="eyebrow">Timeline</p>
+  <h2>Two Parallel Tracks to Launch</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:740px; margin:0 auto 24px;">You build the tools. I build 100s of Loom walkthroughs in the classroom, film all the content, manage the group, and drive traffic. First 30 days of content must be built before we pre-sell anything.</p>
+
+  <div class="grid-2 mb-16">
+    <div class="card card-green" style="padding:20px 24px;">
+      <h4 class="text-green mb-8" style="font-size:16px;">Thomas &#8212; Tools Track</h4>
+      <p class="text-secondary" style="font-size:14px; line-height:1.5;">Build all 8 deliverables using Claude Code. 2&#8211;3 weeks.</p>
+    </div>
+    <div class="card card-violet" style="padding:20px 24px;">
+      <h4 class="text-accent mb-8" style="font-size:16px;">Jordan &#8212; Content Track</h4>
+      <p class="text-secondary" style="font-size:14px; line-height:1.5;">Record 100s of Loom videos, build classroom, film walkthroughs. 4&#8211;6 weeks.</p>
+    </div>
+  </div>
+
+  <div class="tl-grid mb-16">
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-purple">Weeks 1&#8211;2 / Thomas</span>
+      <h4>Core Kit + Lead Engine + Inbox</h4>
+      <ul>
+        <li>CLAUDE.md + skills architecture</li>
+        <li>Lead enrichment n8n workflow</li>
+        <li>Campaign setup automation</li>
+        <li>Inbox monitor &amp; reply classifier</li>
+      </ul>
+    </div>
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-purple">Weeks 1&#8211;4 / Jordan</span>
+      <h4>Classroom Build (Days 1&#8211;30)</h4>
+      <ul>
+        <li>Loom walkthroughs for every tool Thomas builds</li>
+        <li>Step-by-step setup guides (like Nick Saraev)</li>
+        <li>Daily action prompts for the Rule of 100</li>
+        <li>ICP, offer, podcast, and outreach modules</li>
+      </ul>
+    </div>
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-amber">Week 3 / Thomas</span>
+      <h4>Analytics + Proposals + Content Writer</h4>
+      <ul>
+        <li>Analytics &amp; daily briefing workflow</li>
+        <li>Proposal generator (HTML to PDF)</li>
+        <li>Content script writer skill</li>
+        <li>End-to-end testing</li>
+      </ul>
+    </div>
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-amber">Weeks 5&#8211;6 / Jordan</span>
+      <h4>Pre-Launch Content + Group Warmup</h4>
+      <ul>
+        <li>Finish Days 31&#8211;100 content outline</li>
+        <li>Record YouTube videos driving to free Skool</li>
+        <li>Warm up free group with AI teasers</li>
+        <li>Beta test classroom with 5&#8211;10 members</li>
+      </ul>
+    </div>
+    <div class="tl-card tl-full">
+      <span class="tl-badge tl-badge-green">Launch Gate</span>
+      <h4>Pre-Sell Only After 30 Days of Content Is Built</h4>
+      <ul>
+        <li><strong>Thomas:</strong> All 8 tools built, tested, documented</li>
+        <li><strong>Jordan:</strong> First 30 days of classroom content recorded and uploaded</li>
+        <li><strong>Both:</strong> End-to-end test with real accounts before opening doors</li>
+        <li>Nothing goes on sale until the Day 1&#8211;30 experience is bulletproof</li>
+      </ul>
+      <p class="milestone mt-12">Ready to pre-sell</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13: VALUE STACK -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="13">
+<div class="slide-inner">
+  <p class="eyebrow">What They Get</p>
+  <h2 class="text-accent">The Value Stack</h2>
+  <div class="section-divider"></div>
+
+  <div class="card mb-24">
+    <div class="value-line">
+      <span>Weekly live coaching call with Jordan</span>
+      <strong>$500/mo</strong>
+    </div>
+    <div class="value-line">
+      <span>CLAUDE.md + Skills Kit (production-ready AI config)</span>
+      <strong>$1,500 value</strong>
+    </div>
+    <div class="value-line">
+      <span>n8n Workflow Suite (lead enrichment, inbox, campaigns, analytics)</span>
+      <strong>$2,500 value</strong>
+    </div>
+    <div class="value-line">
+      <span>100-day guided curriculum with $3K guarantee</span>
+      <strong>$2,000 value</strong>
+    </div>
+    <div class="value-line">
+      <span>Proposal Generator</span>
+      <strong>$497 value</strong>
+    </div>
+    <div class="value-line">
+      <span>Content Script Writer</span>
+      <strong>$500/mo value</strong>
+    </div>
+    <div class="value-line">
+      <span>AI Video via Kloned (Month 3+)</span>
+      <strong>$697/mo value</strong>
+    </div>
+    <div class="value-line">
+      <span>Private community of action-takers</span>
+      <strong>$197/mo value</strong>
+    </div>
+    <div class="value-line" style="border-top:2px solid rgba(255,255,255,0.1); margin-top:8px; padding-top:16px;">
+      <strong style="font-size:18px;">TOTAL</strong>
+      <strong style="font-size:18px;">$8,391/mo</strong>
+    </div>
+  </div>
+
+  <div class="glow-card">
+    <p style="font-size:20px; color:var(--text-secondary);"><s>$8,391/mo</s></p>
+    <div class="price-big text-green">$97/mo</div>
+    <div class="savings-badge">10x ROI guaranteed or money back</div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 14: CONTENT & TRAFFIC ENGINE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="14">
+<div class="slide-inner">
+  <p class="eyebrow">Traffic Engine</p>
+  <h2 class="text-green">AI Content Drives Everything</h2>
+  <div class="section-divider"></div>
+
+  <div class="card card-green card-sm mb-24 text-center">
+    <p style="font-size:18px;">&#8220;Every time I put out AI content, I get crazy views and generate more leads. There&#8217;s obviously a massive demand for it.&#8221;</p>
+  </div>
+
+  <div class="grid-2 mb-24">
+    <div class="card">
+      <h4 class="mb-12">Content Types That Work</h4>
+      <ul class="check-list" style="font-size:16px;">
+        <li>Reviewing AI tools</li>
+        <li>Building automations over the shoulder</li>
+        <li>Implementing AI to solve problems</li>
+        <li>Case studies</li>
+        <li>Tutorials (n8n, Claude Code)</li>
+        <li>Deep dives</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 class="mb-12">The Funnel</h4>
+      <div class="flow-row mb-12">
+        <div class="flow-box">YouTube AI Content</div>
+        <div class="flow-arrow">&#8594;</div>
+        <div class="flow-box">Free Skool Group<br><strong style="font-size:14px;">5,000</strong></div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-box-green">Paid Skool<br><strong style="font-size:14px;">$97/mo</strong></div>
+        <div style="padding:0 8px; font-size:14px; color:var(--text-secondary);">+</div>
+        <div class="flow-box">Agency<br><strong style="font-size:14px;">$6&#8211;7K/mo DFY</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-violet card-sm text-center">
+    <p style="font-size:18px;"><strong>Two-tier pitch:</strong> Want the systems? Join Skool for $97/mo. Want us to do it for you? Pay $6&#8211;7K/mo for the agency.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 15: REVENUE SCENARIOS -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="15">
+<div class="slide-inner">
+  <p class="eyebrow">The Math</p>
+  <h2 class="text-green">Revenue Scenarios</h2>
+  <div class="section-divider"></div>
+
+  <div class="grid-3 mb-24" style="margin-top:16px;">
+    <div class="pricing-card">
+      <h4 class="text-secondary mb-8">Conservative</h4>
+      <p class="text-secondary small">2% of 5,000</p>
+      <div class="price-big text-accent" style="font-size:40px;">$9.7K</div>
+      <p class="text-secondary small">MRR</p>
+      <p class="text-secondary mt-12" style="font-size:15px;">100 members &times; $97</p>
+      <p class="text-secondary" style="font-size:14px; margin-top:4px;">~$87K Year 1</p>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Target</div>
+      <h4 class="text-secondary mb-8">Moderate</h4>
+      <p class="text-secondary small">5% of 5,000</p>
+      <div class="price-big text-green" style="font-size:40px;">$24K</div>
+      <p class="text-secondary small">MRR</p>
+      <p class="text-secondary mt-12" style="font-size:15px;">250 members &times; $97</p>
+      <p class="text-secondary" style="font-size:14px; margin-top:4px;">~$290K Year 1</p>
+    </div>
+    <div class="pricing-card">
+      <h4 class="text-secondary mb-8">Aggressive</h4>
+      <p class="text-secondary small">10% of 5,000</p>
+      <div class="price-big text-amber" style="font-size:40px;">$48.5K</div>
+      <p class="text-secondary small">MRR</p>
+      <p class="text-secondary mt-12" style="font-size:15px;">500 members &times; $97</p>
+      <p class="text-secondary" style="font-size:14px; margin-top:4px;">~$580K Year 1</p>
+    </div>
+  </div>
+
+  <div class="card card-green card-sm text-center">
+    <p style="font-size:17px;"><strong>Key insight:</strong> Community revenue is pure profit. No service delivery, no client management, no hourly work. Just content, tools, and scale.</p>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 16: THOMAS REVENUE SHARE -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="16">
+<div class="slide-inner">
+  <p class="eyebrow">The Deal</p>
+  <h2>Your Revenue Share</h2>
+  <div class="section-divider"></div>
+
+  <p class="subtitle" style="font-size:18px; max-width:700px; margin:0 auto 32px;">No salary. No retainer. No invoicing. A percentage of every dollar, every month, for as long as it runs.</p>
+
+  <div class="card mb-24">
+    <table class="rev-table">
+      <thead>
+        <tr>
+          <th>Active Members</th>
+          <th>MRR</th>
+          <th>15%</th>
+          <th>20%</th>
+          <th>25%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>50</td>
+          <td>$4,850</td>
+          <td>$728</td>
+          <td>$970</td>
+          <td>$1,213</td>
+        </tr>
+        <tr>
+          <td>150</td>
+          <td>$14,550</td>
+          <td>$2,183</td>
+          <td>$2,910</td>
+          <td>$3,638</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>300</td>
+          <td>$29,100</td>
+          <td>$4,365</td>
+          <td class="text-green">$5,820</td>
+          <td>$7,275</td>
+        </tr>
+        <tr>
+          <td>500</td>
+          <td>$48,500</td>
+          <td>$7,275</td>
+          <td>$9,700</td>
+          <td>$12,125</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-sm">
+      <h4 class="mb-8">The Math</h4>
+      <p class="text-secondary" style="font-size:16px;">Rolling cohorts. ~$320 per member for 100 days. MRR grows continuously as new cohorts start each month. Members who hit their $3K goal stay because the system is proven.</p>
+    </div>
+    <div class="card card-sm card-green">
+      <h4 class="text-green mb-8">At 300 Members, 20%</h4>
+      <p class="text-secondary" style="font-size:16px;"><strong class="text-green" style="font-size:24px;">$5,820/mo</strong><br>For 5&#8211;10 hours/month of maintenance. Plus every member is exposed to Kloned &#8212; built-in distribution for your product.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 17: 7-DAY LAUNCH PLAN -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="17">
+<div class="slide-inner">
+  <p class="eyebrow">Go-To-Market</p>
+  <h2>The 7-Day Launch</h2>
+  <div class="section-divider"></div>
+
+  <div class="tl-grid mb-24">
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-red">Pre-Requisite</span>
+      <h4>30 Days of Content Built First</h4>
+      <ul>
+        <li>100s of Loom walkthroughs in the classroom</li>
+        <li>Day-by-day guided curriculum (Days 1&#8211;30)</li>
+        <li>Tool setup tutorials for every system Thomas builds</li>
+        <li>Beta tested with 5&#8211;10 members</li>
+        <li><strong>Nothing goes on sale until this is done</strong></li>
+      </ul>
+    </div>
+    <div class="tl-card">
+      <span class="tl-badge tl-badge-amber">Launch Week</span>
+      <h4>7-Day Sprint Challenge</h4>
+      <ul>
+        <li>Day 1: ICP clarity workshop</li>
+        <li>Day 2: Offer stack exercise</li>
+        <li>Day 3: Lead research live demo</li>
+        <li>Day 4: Message crafting session</li>
+        <li>Day 5: 100-day system live demo</li>
+        <li>Day 6: Launch outreach together</li>
+        <li>Day 7: Results review + pitch</li>
+      </ul>
+    </div>
+    <div class="tl-card tl-full">
+      <span class="tl-badge tl-badge-green">Conversion Mechanics</span>
+      <h4>From Free to Paid</h4>
+      <ul>
+        <li><strong>Day 3:</strong> Soft pitch &#8212; &#8220;Want the full system? Here&#8217;s what&#8217;s inside.&#8221;</li>
+        <li><strong>Day 5:</strong> Live demo of full paid access &#8212; show what they can&#8217;t get for free</li>
+        <li><strong>Day 7:</strong> Hard pitch with guarantee &#8212; &#8220;$3,000 client or your money back&#8221;</li>
+        <li><strong>Scarcity:</strong> Founding member spots limited to 50</li>
+        <li><strong>Urgency:</strong> Countdown &#8212; enrollment closes Sunday midnight</li>
+      </ul>
+    </div>
+    <div class="tl-card tl-full" style="border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.04);">
+      <span class="tl-badge tl-badge-purple">The Big Play</span>
+      <h4>3-Day Live Event &#8594; Annual Access</h4>
+      <ul>
+        <li><strong>Build up to a 3-day live event</strong> inside the free group &#8212; pure value, live workshops, real results</li>
+        <li><strong>Pitch yearly access</strong> at the end: <strong class="text-green">$497/year</strong> (57% off monthly pricing)</li>
+        <li><strong>Monthly stays at $97/mo</strong> for everyone else &#8212; the event is the only way to get the annual deal</li>
+        <li><strong>The math:</strong> $97/mo = $1,164/year. Annual at $497 = massive perceived savings. Locks in commitment + cash upfront</li>
+        <li><strong>Hormozi playbook:</strong> Free event builds trust, live results create urgency, annual deal creates scarcity</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 18: WHY THIS WORKS -->
+<!-- ============================================================ -->
+<div class="slide" data-slide="18">
+<div class="slide-inner">
+  <p class="eyebrow">Why It Works</p>
+  <h2>7 Reasons This Isn&#8217;t Speculation</h2>
+  <div class="section-divider"></div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">1.</span> Distribution Is Solved</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">5,000 Hormozi fans in the free group. YouTube driving new signups every week.</p>
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">2.</span> Guarantee Is a No-Brainer</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">$320 total risk for a $3,000 outcome. 10x ROI. Clear decision.</p>
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">3.</span> Market Is Proven</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">Nick Saraev: $486K/mo at $187/mo. We&#8217;re half the price, bigger guarantee.</p>
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">4.</span> Your Build Speed</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">120,000 icons in 4 days. Initial build is 2&#8211;3 weeks, not months.</p>
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">5.</span> Revenue Share Alignment</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">You only earn if members hit their goal and keep paying. Perfect alignment.</p>
+    </div>
+    <div class="card" style="padding:20px 24px;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">6.</span> Kloned Distribution</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">Day 60+ integrates your product. Every member becomes a potential Kloned user.</p>
+    </div>
+    <div class="card" style="padding:20px 24px; grid-column:1/-1; text-align:center;">
+      <h4 class="mb-4" style="font-size:18px;"><span class="text-green">7.</span> The Rule of 100 Creates Results</h4>
+      <p class="text-secondary" style="font-size:15px; line-height:1.5;">Hormozi&#8217;s proven framework: 100 actions/day for 100 days. AI makes it 10x easier. 5,000 people already believe in this.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 19: CLOSE -->
+<!-- ============================================================ -->
+<div class="slide center-v" data-slide="19">
+<div class="slide-inner" style="align-items:center;">
+  <p class="eyebrow">Next Steps</p>
+  <h2>What I Need From You</h2>
+
+  <div class="card" style="max-width:640px; width:100%; margin:0 auto 40px;">
+    <ol style="list-style:none; padding:0;">
+      <li style="padding:14px 0 14px 48px; position:relative; font-size:18px; border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="position:absolute; left:0; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; font-size:15px; font-weight:700; text-align:center; line-height:32px;">1</span>
+        <strong>Are you interested?</strong>
+      </li>
+      <li style="padding:14px 0 14px 48px; position:relative; font-size:18px; border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="position:absolute; left:0; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; font-size:15px; font-weight:700; text-align:center; line-height:32px;">2</span>
+        <strong>What revenue share % makes this worth your time?</strong>
+      </li>
+      <li style="padding:14px 0 14px 48px; position:relative; font-size:18px; border-bottom:1px solid rgba(255,255,255,0.04);">
+        <span style="position:absolute; left:0; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; font-size:15px; font-weight:700; text-align:center; line-height:32px;">3</span>
+        <strong>How many hours/week for the initial 2-3 week build?</strong>
+      </li>
+      <li style="padding:14px 0 14px 48px; position:relative; font-size:18px;">
+        <span style="position:absolute; left:0; top:14px; width:32px; height:32px; border-radius:50%; background:var(--accent); color:#fff; font-size:15px; font-weight:700; text-align:center; line-height:32px;">4</span>
+        <strong>Any of the 8 deliverables you'd approach differently?</strong>
+      </li>
+    </ol>
+  </div>
+
+  <p class="playfair-quote text-center" style="max-width:580px; margin:0 auto 40px;">&#8220;Put as much cash in the bank as humanly possible over the next five years.&#8221;</p>
+
+  <p class="text-center" style="font-size:15px; color:var(--text-secondary);">No rush. Have a think and let me know.<br>Happy to jump on a call to talk through it.</p>
+
+  <p class="text-center muted" style="font-size:13px; margin-top:32px;">Prepared by Dopamine Digital</p>
+</div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- Navigation -->
+<div class="nav-bar" id="navBar"></div>
+<div class="nav-counter" id="navCounter">1 / 19</div>
+
+<script>
+(function() {
+  var deck = document.getElementById('deck');
+  var slides = deck.querySelectorAll('.slide');
+  var navBar = document.getElementById('navBar');
+  var navCounter = document.getElementById('navCounter');
+  var totalSlides = slides.length;
+  var currentSlide = 1;
+
+  // Build nav dots
+  for (var i = 1; i <= totalSlides; i++) {
+    var dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+    dot.setAttribute('data-slide', i);
+    (function(n) {
+      dot.addEventListener('click', function() { goToSlide(n); });
+    })(i);
+    navBar.appendChild(dot);
+  }
+
+  function goToSlide(n) {
+    if (n < 1 || n > totalSlides) return;
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.remove('active');
+    }
+    var dots = navBar.querySelectorAll('.nav-dot');
+    for (var i = 0; i < dots.length; i++) {
+      dots[i].classList.remove('active');
+    }
+    currentSlide = n;
+    slides[currentSlide - 1].classList.add('active');
+    slides[currentSlide - 1].scrollTop = 0;
+    dots[currentSlide - 1].classList.add('active');
+    navCounter.textContent = currentSlide + ' / ' + totalSlides;
+  }
+
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      prevSlide();
+    }
+  });
+
+  // Touch swipe
+  var touchStartX = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    var diff = touchStartX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
